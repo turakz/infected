@@ -1,0 +1,86 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "infected"
+dynamic = ["version"]
+description = ''
+readme = "README.md"
+requires-python = ">=3.8"
+license = "MIT"
+keywords = []
+authors = [
+  { name = "turakz", email = "zachary.turak@gmail.com" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = [
+  "pygame",
+  "pyaml",
+]
+
+[project.optional-dependencies]
+lint = [
+  "black",
+  "mypy!=0.812",
+  "pydocstyle[toml]!=6.3.0",
+  "pylint",
+  "ruff",
+  "types-PyYAML"
+]
+
+test = [
+  "coverage~=5.5",
+  "pytest~=6.2.3",
+]
+
+[project.urls]
+Documentation = "https://github.com/turakz/infected#readme"
+Issues = "https://github.com/turakz/infected/issues"
+Source = "https://github.com/turakz/infected"
+
+[tool.hatch.version]
+path = "src/infected/__about__.py"
+
+[tool.hatch.envs.types]
+extra-dependencies = [
+  "mypy>=1.0.0",
+]
+[tool.hatch.envs.types.scripts]
+check = "mypy --install-types --non-interactive {args:src/infected tests}"
+
+[tool.coverage.run]
+source_pkgs = ["infected", "tests"]
+branch = true
+parallel = true
+omit = [
+  "src/infected/__about__.py",
+]
+
+[tool.coverage.paths]
+infected = ["src/infected", "*/infected/src/infected"]
+tests = ["tests", "*/infected/tests"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
+
+[tool.hatch.envs.dev]
+python = "3.8"
+features = [
+]
+
+[tool.hatch.envs.dev.scripts]
