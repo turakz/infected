@@ -20,5 +20,5 @@ lint:
 format:
 	hatch run dev:format
 
-app:
+runapp:
 	python3 src/infected/main.py
