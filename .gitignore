@@ -1,0 +1,51 @@
+# installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# translations
+*.mo
+*.pot
+
+*.log
+
+__pypackages__/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# c extensions
+*.so
+
+# distribution/packaging
+.Python
+build/
+dist/
+downloads/
+lib/
+var/
+wheels/
+share/python-wheels/
+
+# pyinstaller
+*.manifest
+*.spec
+
+.cache
+.pytest_cache/
+.mypy_cache/
+
+# environments
+.env
+env/
+.venv
+.venv/
+ENV/
+env.bak/
+venv.bak/
+
+# ignore vim files
+.*.swp
+.*.swo
+
+# docker
+.docker.env
