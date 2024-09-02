@@ -1,51 +1,37 @@
-# 3rd party
+# std
+import os
+
+# 3rd
 import pygame
+from pygame._sdl2 import Window
 
 # local
-from infected.modules.datamodel.map import Map
 
-# pygame setup
+os.environ['SDL_VIDEO_CENTERED'] = "1"
+
 pygame.init()
-screen = pygame.display.set_mode((1280, 720))
+
+# main window
+main_display_info = pygame.display.Info()
+main_window_width, main_window_height = main_display_info.current_w, main_display_info.current_h
+main_window_size = tuple([main_window_width, main_window_height])
+main_window_surface = pygame.display.set_mode(main_window_size, pygame.RESIZABLE)
+Window.from_display_module().maximize()
+main_window_surface.fill(pygame.color.THECOLORS["darkslategray"])
+
+# window loop
 clock = pygame.time.Clock()
-running = True
-dt = 0
-
-player_pos = pygame.Vector2(screen.get_width() / 2, screen.get_height() / 2)
-
-while running:
-    # poll for events
-    # pygame.QUIT event means the user clicked X to close your window
+while True:
+    # Process player inputs.
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            running = False
+            pygame.quit()
+            raise SystemExit
 
-    # fill the screen with a color to wipe away anything from last frame
-    screen.fill("purple")
+    # Do logical updates here.
+    # ...
 
-    pygame.draw.circle(screen, "red", player_pos, 40)
-
-    keys = pygame.key.get_pressed()
-    if keys[pygame.K_w]:
-        player_pos.y -= 300 * dt
-    if keys[pygame.K_s]:
-        player_pos.y += 300 * dt
-    if keys[pygame.K_a]:
-        player_pos.x -= 300 * dt
-    if keys[pygame.K_d]:
-        player_pos.x += 300 * dt
-
-    # flip() the display to put your work on screen
-    pygame.display.flip()
-
-    # limits FPS to 60
-    # dt is delta time in seconds since last frame, used for framerate-
-    # independent physics.
-    dt = clock.tick(60) / 1000
-
-pygame.quit()
-
-def main():
-    print("hello infected world!")
-    m = Map()
-    print(m)
+    # Render the graphics here.
+    # ...
+    pygame.display.flip()  # Refresh on-screen display
+    clock.tick(60)         # wait until next frame (at 60 FPS)
